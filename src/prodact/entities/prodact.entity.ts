@@ -1,3 +1,4 @@
+import { isArray } from "class-validator";
 import { Categoris } from "src/categoris/entities/categoris.entity";
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 @Entity()
@@ -32,4 +33,6 @@ export class Prodact {
     @ManyToMany(() => Categoris,(categoris) => categoris.prodacts)
     @JoinTable()
     categoris:Categoris[]
+
+
 }

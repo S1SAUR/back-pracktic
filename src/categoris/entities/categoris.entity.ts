@@ -20,4 +20,6 @@ export class Categoris {
 
     @ManyToMany(() => Prodact,(prodact) => prodact.categoris)
     prodacts:Prodact[]
+
+    
 }
