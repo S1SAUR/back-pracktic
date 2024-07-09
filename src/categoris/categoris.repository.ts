@@ -26,19 +26,18 @@ export class CategorisRepository {
         .getMany()
       }
     
-      async update(id: number, UpdateCategorisDto: UpdateCategorisDto) {
-        await this.repositori
-        .createQueryBuilder('category')
-        .update()
-        .set(UpdateCategorisDto)
-        .where('categoey.id = :id',{id})
+      async update(id: number, updateCategorisDto: UpdateCategorisDto) {
+        await this.repositori.update(id,updateCategorisDto )
 
-        return this.repositori.findOneBy({id})
+        return this.repositori
+        .createQueryBuilder('category')
+        .where('category.id = :id',{id})
+        .getOne()
       }
     
       async remove(id: number) {
-        await this.repositori.softDelete({id})
-        
+        await this.repositori.softDelete(id)
+
         return this.repositori
         .createQueryBuilder('category')
         .withDeleted()

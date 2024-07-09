@@ -26,17 +26,19 @@ export class ProdactRepository {
       }
     
       async update(id: number, updateProdactDto: UpdateProdactDto) {
-       await this.repositori
-       .createQueryBuilder('peodact')
-       .update()
-       .set(updateProdactDto)
-       .where('peodact.id = :id',{id})
+       await this.repositori.update(id,updateProdactDto)
 
-       return this.repositori.findOneBy({id})
+       return this.repositori
+        .createQueryBuilder('peodact')
+        .where('peodact.id = :id',{id})
+        .getOne()
       }
     
-      remove(id: number) {
-        return this.repositori.createQueryBuilder('peodact')
+      async remove(id: number) {
+        await this.repositori.softDelete(id)
+
+        return this.repositori
+        .createQueryBuilder('peodact')
         .withDeleted()
         .where('peodact.id = :id',{id})
         .getOne()
